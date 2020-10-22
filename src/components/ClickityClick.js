@@ -7,14 +7,19 @@ class ClickityClick extends React.Component {
  
     // Define the initial state:
     this.state = {
-      hasBeenClicked: false
+      hasBeenClicked: false,
+      count: 0
     };
   }
  
   handleClick = () => {
-    this.setState({
-        hasBeenClicked: true
-      })
+    let newCount = this.state.count + 1
+    this.setState(previousState => {
+      return {
+        hasBeenClicked: !previousState.hasBeenClicked,
+        count: newCount
+      }
+    })
   };
  
   render() {
@@ -22,6 +27,7 @@ class ClickityClick extends React.Component {
       <div>
         <p>I have {this.state.hasBeenClicked ? null : 'not'} been clicked!</p>
         <button onClick={this.handleClick}>Click me!</button>
+        <p>{this.state.count}</p>
       </div>
     );
   }
